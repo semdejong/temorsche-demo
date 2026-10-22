@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { site } from "@/lib/site";
 
 const SOORT = [
@@ -21,6 +21,8 @@ function value(data: FormData, key: string) {
 
 export default function OfferteForm({ variant = "full" }: { variant?: "full" | "short" }) {
   const [copy, setCopy] = useState<string | null>(null);
+  const [filesLabel, setFilesLabel] = useState("Geen bestand gekozen");
+  const fileRef = useRef<HTMLInputElement>(null);
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -118,16 +120,33 @@ export default function OfferteForm({ variant = "full" }: { variant?: "full" | "
         <textarea name="bericht" required />
       </label>
       {full && (
-        <label className="field">
+        <div className="field">
           <span>Foto&apos;s</span>
-          <input name="fotos" type="file" accept="image/*" multiple />
+          <input
+            ref={fileRef}
+            name="fotos"
+            type="file"
+            accept="image/*"
+            multiple
+            className="sr-only"
+            onChange={(event) => {
+              const names = [...(event.target.files ?? [])].map((file) => file.name);
+              setFilesLabel(names.length ? names.join(", ") : "Geen bestand gekozen");
+            }}
+          />
+          <span className="flex flex-wrap items-center gap-3">
+            <button type="button" className="btn btn-line" onClick={() => fileRef.current?.click()}>
+              Kies foto&apos;s
+            </button>
+            <span className="font-normal text-taupe-text">{filesLabel}</span>
+          </span>
           <span className="font-normal text-taupe-text">
             Je kunt foto&apos;s ook mailen naar {site.email}. Voeg ze als bijlage toe aan je e-mail.
           </span>
-        </label>
+        </div>
       )}
       <label className="flex min-h-11 items-start gap-3 text-sm">
-        <input type="checkbox" name="privacy" required className="mt-1 h-5 w-5" />
+        <input type="checkbox" name="privacy" required className="mt-0.5" />
         <span>Je mag deze gegevens gebruiken om contact met me op te nemen over deze aanvraag.</span>
       </label>
       <button type="submit" data-cta="offerte" className="btn btn-ink w-full sm:w-auto">

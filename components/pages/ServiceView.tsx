@@ -54,7 +54,7 @@ export default function ServiceView({ service }: { service: Service }) {
         </section>
       )}
 
-      <section data-section="uitleg" className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:px-6 lg:grid-cols-2">
+      <section data-section="uitleg" className={`mx-auto grid gap-10 px-5 py-14 md:px-6 ${rest.length ? "max-w-6xl lg:grid-cols-2" : "max-w-3xl"}`}>
         <div className="grid content-start gap-8">
           {service.blocks.map((block) => (
             <div key={block.title ?? block.text[0]}>
@@ -95,8 +95,8 @@ export default function ServiceView({ service }: { service: Service }) {
         <div className="mx-auto max-w-6xl px-5 py-12 md:px-6">
           <p className="caption">Ook in huis</p>
           <ul className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-5">
-            {others.map((item) => (
-              <li key={item.href}>
+            {others.map((item, index) => (
+              <li key={item.href} className={index === others.length - 1 ? "col-span-2 md:col-span-1" : ""}>
                 <Link href={item.href} className="flex min-h-24 flex-col border border-ink/10 bg-paper">
                   <span className="h-3" style={{ background: item.swatch }} aria-hidden />
                   <span className="px-3 py-3 font-display font-extrabold">{item.label}</span>

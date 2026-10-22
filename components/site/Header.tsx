@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import CallChoice from "@/components/site/CallChoice";
-import { menuLinks, nav, site } from "@/lib/site";
+import { menuLinks, nav, site, swatches } from "@/lib/site";
 
 function active(path: string, href: string) {
   if (href === "/") return path === "/";
@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header data-section="header" className={`sticky top-0 border-b border-ink/10 bg-paper ${open ? "z-[70]" : "z-40"}`}>
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2.5 md:px-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-2.5 lg:px-8">
         <Link href="/" className="mr-auto shrink-0">
           <Image
             src="/logo-te-morsche.png"
@@ -46,7 +46,7 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex" aria-label="Hoofdmenu">
+        <nav className="hidden items-center gap-x-6 lg:flex" aria-label="Hoofdmenu">
           {nav.map((item) =>
             "children" in item ? (
               <div
@@ -70,11 +70,15 @@ export default function Header() {
                     <Link href="/diensten" className="block px-4 py-2 text-sm hover:bg-muted">
                       Alle diensten
                     </Link>
-                    {item.children.map((child) => (
-                      <Link key={child.href} href={child.href} className="block px-4 py-2 text-sm hover:bg-muted">
-                        {child.label}
-                      </Link>
-                    ))}
+                    {item.children.map((child) => {
+                      const tone = swatches.find((item) => item.href === child.href);
+                      return (
+                        <Link key={child.href} href={child.href} className="flex min-h-11 items-center gap-2 px-4 text-sm hover:bg-muted">
+                          <span className="h-3 w-3 shrink-0" style={{ background: tone?.swatch ?? "#202060" }} aria-hidden />
+                          {child.label}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -93,14 +97,6 @@ export default function Header() {
         <div className="hidden md:block xl:hidden">
           <CallChoice label="Bel" className="btn btn-line" />
         </div>
-        <div className="hidden items-center gap-4 xl:flex">
-          {site.locations.map((location) => (
-            <a key={location.tel} href={location.tel} className="text-sm leading-tight">
-              <span className="block text-[0.68rem] uppercase tracking-widest text-taupe-text">{location.name}</span>
-              <span className="font-semibold">{location.phone}</span>
-            </a>
-          ))}
-        </div>
 
         <Link href="/offerte" data-cta="offerte" className="btn btn-ink px-3 sm:px-4">
           <span className="sm:hidden">Offerte</span>
@@ -116,6 +112,20 @@ export default function Header() {
         >
           {open ? "Sluit" : "Menu"}
         </button>
+      </div>
+      <div className="hidden border-t border-ink/10 xl:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-end gap-6 px-8 py-2 text-sm">
+          {site.locations.map((location, index) => (
+            <a key={location.tel} href={location.tel} className="inline-flex min-h-11 items-center gap-2">
+              <span className="h-3 w-3" style={{ background: index === 0 ? "#202060" : "#409040" }} aria-hidden />
+              <span className="uppercase tracking-widest text-taupe-text">{location.name}</span>
+              <span className="font-semibold">{location.phone}</span>
+            </a>
+          ))}
+          <a href={site.mailto} className="inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline">
+            {site.email}
+          </a>
+        </div>
       </div>
 
       {open && (

@@ -12,16 +12,16 @@ export default function Footer() {
         </div>
         <div>
           <p className="caption">Diensten</p>
-          <ul className="mt-3 grid gap-1.5">
+          <ul className="mt-3">
             {houseLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="inline-flex min-h-11 items-center hover:underline">
+                <Link href={link.href} className="inline-flex min-h-11 items-center hover:underline md:min-h-9">
                   {link.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/monumenten-en-restauratie" className="inline-flex min-h-11 items-center hover:underline">
+              <Link href="/monumenten-en-restauratie" className="inline-flex min-h-11 items-center hover:underline md:min-h-9">
                 Monumenten & restauratie
               </Link>
             </li>

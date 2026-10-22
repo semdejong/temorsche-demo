@@ -79,7 +79,7 @@ export default function OverPage() {
           <p className="mt-3 max-w-2xl text-taupe-text">
             Voor het werk staan onder andere steigers, spuitapparatuur en een eigen verfmengmachine klaar.
           </p>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {materieel.map((item) => (
               <li key={item} className="flex min-h-14 items-center gap-3 border border-ink/10 px-4 font-semibold">
                 <span className="h-6 w-1.5 bg-ink" aria-hidden />

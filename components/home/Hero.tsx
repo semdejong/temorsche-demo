@@ -31,7 +31,7 @@ export default function Hero() {
         alt="Kasteel Middachten in De Steeg: lang monumentaal bouwwerk met geschilderde kozijnen en luiken"
         sizes="(max-width: 1024px) 100vw, 58vw"
         preload
-        className="order-1 h-[48vh] min-h-72 lg:order-2 lg:col-span-7 lg:h-auto"
+        className="order-1 h-52 min-h-0 sm:h-[38vh] sm:min-h-56 lg:order-2 lg:col-span-7 lg:h-auto lg:min-h-[32rem]"
       />
     </section>
   );
