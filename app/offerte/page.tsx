@@ -3,7 +3,8 @@ import OfferteForm from "@/components/forms/OfferteForm";
 import FaqList from "@/components/pages/FaqList";
 import Shell from "@/components/site/Shell";
 import Stroke from "@/components/ui/Stroke";
-import { site } from "@/lib/site";
+import { site, swatches } from "@/lib/site";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Vrijblijvende offerte",
@@ -34,6 +35,20 @@ export default function OffertePage() {
             <p className="mt-2 text-taupe-text">{step.text}</p>
           </article>
         ))}
+      </section>
+
+      <section data-section="soorten" className="mx-auto max-w-6xl px-5 pt-12 md:px-6">
+        <p className="caption">Soort werk</p>
+        <ul className="mt-4 flex gap-3 overflow-x-auto pb-2">
+          {swatches.map((item) => (
+            <li key={item.href} className="min-w-36 shrink-0">
+              <Link href={item.href} className="block border border-ink/10 bg-white">
+                <span className="block h-3" style={{ background: item.swatch }} aria-hidden />
+                <span className="block px-3 py-3 font-display text-sm font-extrabold">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section data-section="formulier" className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:px-6 lg:grid-cols-[1.2fr_0.8fr]">

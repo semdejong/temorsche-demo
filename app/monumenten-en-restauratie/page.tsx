@@ -65,20 +65,30 @@ export default function MonumentenPage() {
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <Photo src="/fotos/img_7263.jpg" alt="Lange gevel van Kasteel Middachten" width={2000} height={1333} sizes="(max-width: 768px) 100vw, 50vw" caption="Kasteel Middachten, De Steeg" />
             <Photo src="/fotos/img_7283.jpg" alt="Kasteel Middachten met gracht en tuin" width={2000} height={1333} sizes="(max-width: 768px) 100vw, 50vw" caption="Gracht en tuin" />
+            <Photo src="/fotos/img_7270.jpg" alt="Geschilderde kozijnen en luiken van Kasteel Middachten" width={2000} height={1334} sizes="(max-width: 768px) 100vw, 50vw" caption="Kozijnen en luiken" />
+            <Photo src="/fotos/img_7282.jpg" alt="Lange gevelzijde van Kasteel Middachten" width={2000} height={1333} sizes="(max-width: 768px) 100vw, 50vw" caption="De lange gevel" />
             <div className="md:col-span-2">
-              <Photo src="/fotos/img_7265.jpg" alt="Geschilderde kozijnen van Kasteel Middachten" width={2000} height={1333} sizes="(max-width: 768px) 100vw, 1000px" caption="Geschilderde kozijnen" />
+              <Photo src="/fotos/img_7265.jpg" alt="Geschilderde kozijnen van Kasteel Middachten" width={2000} height={1333} sizes="(max-width: 768px) 100vw, 1100px" caption="Geschilderde kozijnen" />
             </div>
           </div>
+          <Link href="/projecten" className="btn btn-line mt-8">
+            Alle projectfoto’s
+          </Link>
         </div>
       </section>
 
-      <section data-section="reuversweerd" className="border-t border-ink/10 bg-muted">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-6">
-          <h2 className="font-serif text-4xl">Kasteel Reuversweerd</h2>
-          <p className="mt-4 max-w-2xl text-lg">Restauratieproject Kasteel Reuversweerd — schilderwerk en beglazing.</p>
-          <Link href="/offerte" data-cta="offerte" className="btn btn-ink mt-8">
-            Offerte aanvragen
-          </Link>
+      <section data-section="reuversweerd" className="border-t border-ink/10 bg-ink text-paper">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:grid-cols-2 md:px-6 md:py-20">
+          <h2 className="font-serif text-4xl md:text-5xl">Kasteel Reuversweerd</h2>
+          <div>
+            <p className="text-lg text-paper/90">Restauratieproject Kasteel Reuversweerd — schilderwerk en beglazing.</p>
+            <p className="mt-4 text-paper/75">
+              Het project vroeg om schilderwerk en om beglazing, naast het specialistische werk aan Kasteel Middachten.
+            </p>
+            <Link href="/offerte" data-cta="offerte" className="btn mt-8 bg-paper text-ink hover:bg-white">
+              Offerte aanvragen
+            </Link>
+          </div>
         </div>
       </section>
     </Shell>
