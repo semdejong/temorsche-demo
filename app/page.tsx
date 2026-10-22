@@ -1,23 +1,30 @@
-import Header from "@/components/sections/Header";
-import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import About from "@/components/sections/About";
-import Reviews from "@/components/sections/Reviews";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
+import ContactBand from "@/components/home/ContactBand";
+import Hero from "@/components/home/Hero";
+import Kennis from "@/components/home/Kennis";
+import KleurGlas from "@/components/home/KleurGlas";
+import Middachten from "@/components/home/Middachten";
+import OverBand from "@/components/home/OverBand";
+import Routes from "@/components/home/Routes";
+import Spuit from "@/components/home/Spuit";
+import Swatches from "@/components/home/Swatches";
+import Vestigingen from "@/components/home/Vestigingen";
+import Werkwijze from "@/components/home/Werkwijze";
+import Shell from "@/components/site/Shell";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Services />
-        <About />
-        <Reviews />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <Shell>
+      <Hero />
+      <Routes />
+      <Swatches />
+      <Middachten />
+      <Kennis />
+      <Spuit />
+      <KleurGlas />
+      <Werkwijze />
+      <OverBand />
+      <Vestigingen />
+      <ContactBand />
+    </Shell>
   );
 }

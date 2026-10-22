@@ -1,14 +1,36 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Archivo, Fraunces, Source_Sans_3 } from "next/font/google";
 import type { CSSProperties } from "react";
 import "./globals.css";
 import { content } from "@/content";
 import SleadsBadge from "@/components/SleadsBadge";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-source",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: content.seo.title,
+  title: {
+    default: content.seo.title,
+    template: "%s · Te Morsche",
+  },
   description: content.seo.description,
   robots: {
     index: false,
@@ -16,12 +38,24 @@ export const metadata: Metadata = {
     nocache: true,
     googleBot: { index: false, follow: false, noimageindex: true },
   },
-  icons: content.company.logo ? { icon: content.company.logo } : undefined,
+  icons: { icon: content.company.logo },
+  openGraph: {
+    title: content.seo.title,
+    description: content.seo.description,
+    locale: "nl_NL",
+    images: [
+      {
+        url: "/fotos/img_7263.jpg",
+        width: 2000,
+        height: 1333,
+        alt: "Kasteel Middachten, lang monumentaal bouwwerk met geschilderde kozijnen",
+      },
+    ],
+  },
 };
 
-export const viewport: Viewport = { themeColor: content.colors.primary };
+export const viewport: Viewport = { themeColor: "#F7F4EE" };
 
-// Sleads demo-analytics (cookieloos). Events tellen alleen voor slugs die via POST /api/demos geregistreerd zijn.
 const TRACKER_SRC = "https://sleads-demo-analytics.vercel.app/t.js";
 const TRACKER_ENDPOINT = "https://basic-tiger-117.convex.site/track";
 
@@ -35,15 +69,31 @@ const themeVars = {
   "--muted": c.muted,
 } as CSSProperties;
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HousePainter",
+  name: content.company.name,
+  email: "info@te-morsche.nl",
+  telephone: ["+31544481278", "+31573459699"],
+  areaServed: ["Beltrum", "Lochem"],
+  founder: { "@type": "Person", name: "Raimond te Morsche" },
+  url: "https://www.te-morsche.nl",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={content.seo.lang} style={themeVars} className={`${geistSans.variable} h-full scroll-smooth antialiased`}>
+    <html
+      lang={content.seo.lang}
+      style={themeVars}
+      className={`${archivo.variable} ${fraunces.variable} ${sourceSans.variable} h-full antialiased`}
+    >
       <head>
         <script async src={TRACKER_SRC} data-demo={content.slug} data-endpoint={TRACKER_ENDPOINT} />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col pb-24 md:pb-0">
         {children}
         <SleadsBadge />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
   );
